@@ -2,6 +2,7 @@
   "name": "react-app-jar-of-coins",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kullep.github.io/react-app-jar-of-coins/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.1",
     "@testing-library/jest-dom": "^5.16.1",
@@ -22,6 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
