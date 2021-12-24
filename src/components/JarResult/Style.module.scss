@@ -1,0 +1,25 @@
+.jarContainer {
+    width: 155px;
+    height: 300px;
+    .header {
+        margin: 20px;
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 22px;
+        text-align: center;
+        color: #2f2f2f;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        border-radius: 7px;
+        width: 155px;
+        height: 238px;
+    }
+}

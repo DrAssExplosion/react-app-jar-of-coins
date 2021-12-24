@@ -1,0 +1,140 @@
+@import "./../../styleMixin/";
+
+.bodyContainer {
+    position: absolute;
+    top: 10%;
+    left: calc(50% - 1184px / 2);
+
+    .main {
+        width: 1184px;
+        height: 572px;
+        border: 0.5px solid #369cb7;
+        border-radius: 7px;
+        display: flex;
+        flex-wrap: wrap;
+
+        .header {
+            width: 100%;
+            margin-top: 50px;
+            color: #2f2f2f;
+            font-family: "Montserrat";
+            font-style: normal;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 22px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 0 122px 100px 85px;
+            display: flex;
+
+            .moneyContainer {
+                display: flex;
+                flex-wrap: wrap;
+                grid-gap: 10px;
+                width: 85px;
+            }
+
+            .jarContainer {
+                width: 380px;
+                display: flex;
+                position: relative;
+                justify-content: space-around;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .bottomElement {
+                    display: flex;
+                    flex-direction: column;
+                    width: 200px;
+                    height: 35px;
+                    position: absolute;
+                    bottom: 40px;
+                    .textClear {
+                        cursor: pointer;
+                        height: 24px;
+                        font-family: Montserrat;
+                        font-style: normal;
+                        font-weight: bold;
+                        font-size: 16px;
+                        line-height: 24px;
+                        text-align: center;
+                        text-decoration-line: underline;
+                        color: #369cb7;
+                        user-select: none;
+                        margin-bottom: 10px;
+                        &:hover {
+                            opacity: 0.8;
+                        }
+                        &:active {
+                            animation: linkHover 0.2s both;
+                        }
+                    }
+                    .buttonDone {
+                        @include mixButton();
+                    }
+                }
+            }
+
+            .multiJarContainer {
+                display: flex;
+                position: relative;
+                justify-content: space-around;
+                align-items: center;
+                grid-gap: 25px;
+                margin-left: 100px;
+            }
+        }
+    }
+
+    .bottomButtonSubmit {
+        display: flex;
+        justify-content: center;
+        margin-top: 45px;
+        input {
+            @include mixButton(#fff, #369cb7);
+        }
+    }
+
+    .resultMain {
+        width: 1184px;
+        height: 572px;
+        border: 0.5px solid #369cb7;
+        border-radius: 7px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        .resultContainer {
+            width: 770px;
+            height: 467px;
+            border: 0.5px solid #369cb7;
+            border-radius: 7px;
+            display: flex;
+            flex-direction: column;
+            grid-gap: 50px;
+            .container {
+                display: flex;
+                justify-content: space-evenly;
+                margin-top: 25px;
+            }
+            .bottomButtonRedo {
+                display: flex;
+                justify-content: center;
+                input {
+                    @include mixButton();
+                }
+            }
+        }
+    }
+}
+
+@keyframes linkHover {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+    to {
+        transform: scale3d(1.05, 1.05, 1.05);
+    }
+}

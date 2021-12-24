@@ -1,0 +1,48 @@
+@import "./../../styleMixin/";
+
+.container {
+    width: 600px;
+    height: 252px;
+    border: 0.5px solid #369cb7;
+    border-radius: 7px;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    background: #fff;
+    flex-direction: column;
+    right: -15px;
+    grid-gap: 30px;
+
+    .header {
+        display: flex;
+        margin: 25px 25px 0;
+        justify-content: flex-end;
+        img {
+            user-drag: none;
+            -webkit-user-drag: none;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            &:hover {
+                cursor: pointer;
+            }
+            &:active {
+                transform: scale(0.8);
+            }
+        }
+    }
+
+    .main {
+        display: flex;
+        justify-content: center;
+        grid-gap: 35px;
+    }
+    .footer {
+        display: flex;
+        justify-content: center;
+        .buttonDone {
+            @include mixButton();
+        }
+    }
+}
