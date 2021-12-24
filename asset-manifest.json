@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-app-jar-of-coins/static/css/main.c14f0984.css",
+    "main.js": "/react-app-jar-of-coins/static/js/main.0a8ea083.js",
+    "index.html": "/react-app-jar-of-coins/index.html",
+    "main.c14f0984.css.map": "/react-app-jar-of-coins/static/css/main.c14f0984.css.map",
+    "main.0a8ea083.js.map": "/react-app-jar-of-coins/static/js/main.0a8ea083.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c14f0984.css",
+    "static/js/main.0a8ea083.js"
+  ]
+}
