@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/react-app-jar-of-coins/static/css/main.c14f0984.css",
-    "main.js": "/react-app-jar-of-coins/static/js/main.0a8ea083.js",
+    "main.css": "/react-app-jar-of-coins/static/css/main.0c03a1ac.css",
+    "main.js": "/react-app-jar-of-coins/static/js/main.ee513e20.js",
     "index.html": "/react-app-jar-of-coins/index.html",
-    "main.c14f0984.css.map": "/react-app-jar-of-coins/static/css/main.c14f0984.css.map",
-    "main.0a8ea083.js.map": "/react-app-jar-of-coins/static/js/main.0a8ea083.js.map"
+    "main.0c03a1ac.css.map": "/react-app-jar-of-coins/static/css/main.0c03a1ac.css.map",
+    "main.ee513e20.js.map": "/react-app-jar-of-coins/static/js/main.ee513e20.js.map"
   },
   "entrypoints": [
-    "static/css/main.c14f0984.css",
-    "static/js/main.0a8ea083.js"
+    "static/css/main.0c03a1ac.css",
+    "static/js/main.ee513e20.js"
   ]
 }
