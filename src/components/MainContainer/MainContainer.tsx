@@ -17,9 +17,7 @@ const MainContainer = () => {
 
     const [jarComponentRef, setJarComponentRef] = useState(null);
     const [submitIsDown, setSubmitIsDown] = useState(false);
-    console.log(arrJars);
-    console.log(currentJar);
-
+    
     const restartApp = () => {
         dispatch(resetAllJars());
         dispatch(clearCurrentJar());
@@ -40,7 +38,7 @@ const MainContainer = () => {
 
                                 <div className={style.moneyContainer}>
                                     {
-                                        currentJar.arrCounterMoney.map((count, i) => <Money key={i} idMoney={i} imageLink={currentJar.arrLinksMoney[i]} count={count} jarComponentRef={jarComponentRef} />)
+                                        currentJar.arrCounterMoney.map((count, i) => <Money key={i} drag={true} idMoney={i} imageLink={currentJar.arrLinksMoney[i]} count={count} jarComponentRef={jarComponentRef} />)
                                     }
                                 </div>
 

@@ -5,14 +5,16 @@ import imgJar from './../../images/jar.png';
 import imgFilledJar from './../../images/filledJar.png';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setIdActiveMiniJar, setMoneyInJar } from '../../store/reducers/currentJar';
+import Money from '../Money/Money';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 
 const Jar = (props: IJarComponent) => {
 
     const jarComponentRef = useRef(null);
     const dispatch = useAppDispatch();
-    const arrJars = useAppSelector(state => state.allJars);
-
+    const currentJar = useAppSelector(state => state.currentJar);
 
     useEffect(() => {
         if (props.main === true) {
@@ -36,7 +38,6 @@ const Jar = (props: IJarComponent) => {
             e.currentTarget.style.filter = 'hue-rotate(325deg)';
             dispatch(setMoneyInJar(true));
         }
-
     }
     const dragLeaveHandler = (e: any): void => {
         if (props.main === true) {
@@ -61,7 +62,18 @@ const Jar = (props: IJarComponent) => {
                 style={styleImage}
                 onDragEnter={e => dragEnterHandler(e)}
                 onDragOver={e => { e.preventDefault() }}
-                onDragLeave={e => dragLeaveHandler(e)}></div>
+                onDragLeave={e => dragLeaveHandler(e)}>
+                {
+                    props.main !== true ? null :
+                        currentJar.arrCounterMoney.map((count, index) => {
+                            const newArrElements = [];
+                            for (let i = 0; i < count; i++) {
+                                newArrElements.push(<Money key={i} idMoney={i} imageLink={currentJar.arrLinksMoney[index]} eventMoneyInJar={true} />)
+                            }
+                            return newArrElements;
+                        })
+                }
+            </div>
             <div className={style.textBottom}>
                 {
                     props.filled === true ? <span onClick={() => { openModal(); }}>Перепроверить</span> : null

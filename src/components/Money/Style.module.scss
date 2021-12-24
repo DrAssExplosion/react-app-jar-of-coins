@@ -1,5 +1,6 @@
 .imageBlock {
-    background-size: cover;
+    background: no-repeat;
+    background-position: center bottom;
     width: 85px;
     height: 85px;
     &:focus {

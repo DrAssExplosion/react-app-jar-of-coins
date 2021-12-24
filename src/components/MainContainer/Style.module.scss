@@ -8,7 +8,7 @@
     .main {
         width: 1184px;
         height: 572px;
-        border: 0.5px solid #369cb7;
+        outline: 0.5px solid #369cb7;
         border-radius: 7px;
         display: flex;
         flex-wrap: wrap;
@@ -100,7 +100,7 @@
     .resultMain {
         width: 1184px;
         height: 572px;
-        border: 0.5px solid #369cb7;
+        outline: 0.5px solid #369cb7;
         border-radius: 7px;
         display: flex;
         flex-wrap: wrap;
@@ -136,5 +136,52 @@
     }
     to {
         transform: scale3d(1.05, 1.05, 1.05);
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .bodyContainer {
+        left: 0;
+        right: 0;
+        padding-bottom: 100px;
+        .main {
+            width: 100%;
+            height: 100%;
+            flex-wrap: nowrap;
+            flex-direction: column;
+            .header {
+                margin: 50px 0;
+            }
+            .container {
+                padding: 0 50px 50px;
+                flex-direction: column;
+                .moneyContainer {
+                    width: 100%;
+                    justify-content: center;
+                }
+                .jarContainer {
+                    width: 100%;
+                    justify-content: center;
+                    margin: 30px 0 60px 0;
+                    .bottomElement {
+                        bottom: -10px;
+                    }
+                }
+                .multiJarContainer {
+                    margin-left: 0;
+                    width: 100%;
+                }
+            }
+        }
+
+        .resultMain {
+            width: 100%;
+            .resultContainer {
+                .container {
+                }
+                .bottomButtonRedo {
+                }
+            }
+        }
     }
 }

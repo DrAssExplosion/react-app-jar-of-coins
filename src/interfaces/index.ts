@@ -3,7 +3,8 @@ export interface IMoneyComponent {
     imageLink: string,
     count?: number,
     drag?: boolean,
-    jarComponentRef?: any//React.MutableRefObject<JSX.Element> | null
+    eventMoneyInJar?: boolean,
+    jarComponentRef?: any //React.MutableRefObject<JSX.Element> | null
 }
 
 export interface IJarComponent {
