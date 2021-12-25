@@ -19,26 +19,26 @@ const Money = (props: IMoneyComponent) => {
     const dispatch = useAppDispatch();
     const idActiveMoneyStore = useAppSelector(state => state.currentJar.activeMoney);
     const moneyInJar = useAppSelector(state => state.currentJar.moneyInJar);
-    const [positionX, setPositionX] = useState('20px');
-    const [positionY, setPositionY] = useState('20px');
+    const [positionX, setPositionX] = useState(20);
+    const [positionY, setPositionY] = useState(20);
     const [zIndex, setZIndex] = useState(5);
+    const [lastPosX, setLastPosX] = useState(0);
+    const [lastPosY, setLastPosY] = useState(0);
 
     let styleMoney = {};
 
     useEffect(() => {
         const x = getRandomInt(5, 50);
         const y = getRandomInt(15, 45);
-        let left = x + 'px';
-        let top = y + 'px';
-        setPositionX(left);
-        setPositionY(top);
+        setPositionX(x);
+        setPositionY(y);
         setZIndex(20 - y);
     }, [])
 
     if (props.eventMoneyInJar === true) {
         styleMoney = {
-            left: positionX,
-            bottom: positionY,
+            left: positionX + 'px',
+            bottom: positionY + 'px',
             zIndex: zIndex
         };
     }
@@ -49,18 +49,22 @@ const Money = (props: IMoneyComponent) => {
 
     const moveMoneyInJar = (e: any): void => {
         e.preventDefault()
-
-        let x = e.clientX - e.target.offsetParent.offsetParent.offsetWidth * 3;
-        let y = - e.clientY + e.target.offsetParent.offsetParent.offsetHeight * 2;
+        
+        let moveToX = Math.sign(lastPosX - e.clientX);
+        let moveToY = Math.sign(lastPosY - e.clientY);
+        setLastPosX(e.clientX);
+        setLastPosY(e.clientY);
+       
+        let y = positionY;
+        let x = positionX;
+        x -= moveToX;
+        y += moveToY;
         x = x >= 50 ? 50 : (x <= 5) ? 5 : x;
         y = y >= 45 ? 45 : (y <= 15) ? 15 : y;
 
-        let left = x + 'px';
-        let top = y + 'px';
-
         setZIndex(20 - y);
-        setPositionX(left);
-        setPositionY(top);
+        setPositionX(x);
+        setPositionY(y);
     }
 
     const dragStartHandler = (e: any): void => {
