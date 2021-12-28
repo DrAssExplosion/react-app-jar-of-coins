@@ -19,12 +19,13 @@
             padding: 0 122px 100px 85px;
             display: flex;
             .multiJarContainer {
-                display: flex;
+                display: grid;
                 position: relative;
                 justify-content: space-around;
                 align-items: center;
                 grid-gap: 25px;
                 flex: 3;
+                grid-template-columns: repeat(3, 150px);
             }
         }
     }
