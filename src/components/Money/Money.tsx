@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { addMoney, setIdActiveMoney, setMoneyInJar } from '../../store/reducers/currentJar';
 import MiniCounter from '../MiniCounter/MiniCounter';
 import style from './Style.module.scss';
-
+import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
 
 const getRandomInt = (min: number, max: number): number => {
     min = Math.ceil(min);
@@ -14,31 +14,32 @@ const getRandomInt = (min: number, max: number): number => {
 }
 
 
+
 const Money = (props: IMoneyComponent) => {
 
     const dispatch = useAppDispatch();
     const idActiveMoneyStore = useAppSelector(state => state.currentJar.activeMoney);
     const moneyInJar = useAppSelector(state => state.currentJar.moneyInJar);
-    const [positionX, setPositionX] = useState(20);
-    const [positionY, setPositionY] = useState(20);
+    const dataMainJar = useAppSelector(state => state.dataMainJar);
+    const [coordsMoney, setCoordsMoney] = useState([0, 0]);
+    const [coordsMoveMoney, setCoordsMoveMoney] = useState([0, 0]);
+    const moneyRef = useRef<HTMLInputElement>(null);
     const [zIndex, setZIndex] = useState(5);
-    const [lastPosX, setLastPosX] = useState(0);
-    const [lastPosY, setLastPosY] = useState(0);
+
 
     let styleMoney = {};
 
     useEffect(() => {
-        const x = getRandomInt(5, 50);
-        const y = getRandomInt(15, 45);
-        setPositionX(x);
-        setPositionY(y);
-        setZIndex(20 - y);
+        const x = getRandomInt(0, 50);
+        const y = getRandomInt(130, 145);
+        setCoordsMoney([x, y]);
+        setZIndex(y);
     }, [])
 
     if (props.eventMoneyInJar === true) {
         styleMoney = {
-            left: positionX + 'px',
-            bottom: positionY + 'px',
+            left: coordsMoney[0] + 'px',
+            top: coordsMoney[1] + 'px',
             zIndex: zIndex
         };
     }
@@ -47,62 +48,68 @@ const Money = (props: IMoneyComponent) => {
         backgroundImage: `url(${props.imageLink})`
     };
 
-    const moveMoneyInJar = (e: any): void => {
-        e.preventDefault()
-        
-        let moveToX = Math.sign(lastPosX - e.clientX);
-        let moveToY = Math.sign(lastPosY - e.clientY);
-        setLastPosX(e.clientX);
-        setLastPosY(e.clientY);
-       
-        let y = positionY;
-        let x = positionX;
-        x -= moveToX;
-        y += moveToY;
-        x = x >= 50 ? 50 : (x <= 5) ? 5 : x;
-        y = y >= 45 ? 45 : (y <= 15) ? 15 : y;
-
-        setZIndex(20 - y);
-        setPositionX(x);
-        setPositionY(y);
+    const MoneyComponent = () => {
+        return (
+            <div ref={moneyRef} style={{ position: props.eventMoneyInJar === true ? 'absolute' : 'relative', ...styleMoney }} >
+                <div className={style.imageBlock} style={styleImage}></div>
+                <div>{(props.count !== null && props.count !== undefined) ? <MiniCounter count={props.count} /> : null}</div>
+            </div>
+        )
     }
 
-    const dragStartHandler = (e: any): void => {
-        props.jarComponentRef.current.style.filter = 'hue-rotate(345deg)';
+    const moveMoneyInJar = (e: any, x: number, y: number): void => {
+        if (moneyRef.current) {
+            const dataElement = moneyRef.current.getBoundingClientRect();
+            // const grabPositionX = x - left;
+            // const grabPositionY = y - top;
+            let coordsElementX = dataElement.left - dataMainJar.data.left;
+            let coordsElementY = (dataMainJar.data.top + dataMainJar.data.height) - (dataElement.top + dataElement.height) + 70;
+            
+            coordsElementX = coordsElementX < 0 ? 0 : (coordsElementX > 50) ? 50 : coordsElementX;
+            coordsElementY = coordsElementY < 130 ? 130 : (coordsElementY > 145) ? 145 : coordsElementY;
+          
+            setCoordsMoveMoney([coordsElementX, coordsElementY]);
+            setZIndex(coordsElementY);
+        }
+    }
+
+    const dragStartHandler = (): void => {
         dispatch(setIdActiveMoney(props.idMoney));
     }
+
     const dragEnterHandler = (e: any): void => {
         if (props.eventMoneyInJar === true) {
-            e.currentTarget.style.filter = 'hue-rotate(325deg)';
             dispatch(setMoneyInJar(true));
         }
     }
-    const dragEndHandler = (e: any): void => {
-        props.jarComponentRef.current.style.filter = 'hue-rotate(0)';
-        if (moneyInJar) {
-            dispatch(addMoney(idActiveMoneyStore));
-        }
+
+    const dragEndHandler = (_: any, x: number, y: number): void => {
+        setCoordsMoney([coordsMoveMoney[0], coordsMoveMoney[1]]);
+        if (moneyInJar) { dispatch(addMoney(idActiveMoneyStore)); }
         dispatch(setIdActiveMoney(null));
     }
 
     return (
-        <div style={{ position: props.eventMoneyInJar === true ? 'absolute' : 'relative', ...styleMoney }} >
-            <div
-                className={style.imageBlock}
-                style={styleImage}
-                draggable={true}
-                onDrag={e => props.eventMoneyInJar === true ? moveMoneyInJar(e) : e.preventDefault()}
-                //  onDragOver={e => e.preventDefault()}
-                onDragOver={e => dragEnterHandler(e)}
-                onDragStart={e => props.drag === true ? dragStartHandler(e) : props.eventMoneyInJar === true ? {} : e.preventDefault()}
-                onDragEnd={e => props.drag === true ? dragEndHandler(e) : props.eventMoneyInJar === true ? {} : e.preventDefault()}>
-            </div>
-            <div>
-                {
-                    (props.count !== null && props.count !== undefined) ? <MiniCounter count={props.count} /> : null
-                }
-            </div>
-        </div >
+        <>
+            {
+                props.drag === true ?
+                    <DragDropContainer
+                        targetKey="jar"
+                        onDragOver={(_: any, e: any) => dragEnterHandler(e)}
+                        onDragStart={() => dragStartHandler()}
+                        onDragEnd={() => dragEndHandler(null, 0, 0)}>
+                        <MoneyComponent />
+                    </DragDropContainer>
+                    : props.eventMoneyInJar === true ?
+                        <DragDropContainer
+                            targetKey="jar2"
+                            onDrag={(_: any, e: any, x: number, y: number) => moveMoneyInJar(e, x, y)}
+                            onDragEnd={(_: any, e: any, x: number, y: number) => dragEndHandler(e, x, y)}>
+                            <MoneyComponent />
+                        </DragDropContainer>
+                        : <MoneyComponent />
+            }
+        </>
     );
 
 }

@@ -7,6 +7,22 @@ export interface IMoneyComponent {
     jarComponentRef?: any //React.MutableRefObject<JSX.Element> | null
 }
 
+export interface ITitle {
+    text?: string
+}
+
+export interface IMoneyContainer {
+    arrMoney?: any,
+    currentJar?: any,
+    jarComponentRef?: any
+}
+
+
+export interface IJarContainer {
+    setJarComponentRef?: any
+}
+
+
 export interface IJarComponent {
     main?: boolean,
     filled?: boolean,

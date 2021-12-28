@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import Money from '../Money/Money';
+import { useEffect, useState } from 'react';
 import style from './Style.module.scss';
 import Jar from '../Jar/Jar';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -7,6 +6,10 @@ import { clearCurrentJar } from '../../store/reducers/currentJar';
 import { resetAllJars, setJar } from '../../store/reducers/allJars';
 import ModalJarInfo from '../ModalJarInfo/ModalJarInfo';
 import JarResult from '../JarResult/JarResult';
+import Title from '../Title/Title';
+import MoneyContainer from '../MoneyContainer/MoneyContainer';
+import JarContainer from '../JarContainer/JarContainer';
+import Money from '../Money/Money';
 
 
 const MainContainer = () => {
@@ -17,12 +20,13 @@ const MainContainer = () => {
 
     const [jarComponentRef, setJarComponentRef] = useState(null);
     const [submitIsDown, setSubmitIsDown] = useState(false);
-    
+
     const restartApp = () => {
         dispatch(resetAllJars());
         dispatch(clearCurrentJar());
         setSubmitIsDown(false);
     };
+
 
     return (
         <>
@@ -32,28 +36,14 @@ const MainContainer = () => {
 
                         <div className={style.main}>
 
-                            <div className={style.header}>Составьте три разные комбинации, чтобы получить 0,56 доллара</div>
+                            <div className={style.header}><Title /></div>
 
                             <div className={style.container}>
 
-                                <div className={style.moneyContainer}>
-                                    {
-                                        currentJar.arrCounterMoney.map((count, i) => <Money key={i} drag={true} idMoney={i} imageLink={currentJar.arrLinksMoney[i]} count={count} jarComponentRef={jarComponentRef} />)
-                                    }
-                                </div>
 
-                                <div className={style.jarContainer}>
-                                    <Jar main={true} setJarComponentRef={setJarComponentRef} />
+                                <MoneyContainer arrMoney={currentJar.arrCounterMoney} currentJar={currentJar} jarComponentRef={jarComponentRef} />
 
-                                    {
-                                        currentJar.amount > 0 ?
-                                            <div className={style.bottomElement}>
-                                                <span onClick={() => { dispatch(clearCurrentJar()) }} className={style.textClear}>Очистить</span>
-                                                <input onClick={() => { dispatch(setJar(currentJar)); dispatch(clearCurrentJar()); }} className={style.buttonDone} type='button' value='Подтвердить' />
-                                            </div> : null
-                                    }
-
-                                </div>
+                                <JarContainer setJarComponentRef={setJarComponentRef} />
 
                                 <div className={style.multiJarContainer}>
                                     {

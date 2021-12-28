@@ -4,7 +4,6 @@
     position: absolute;
     top: 10%;
     left: calc(50% - 1184px / 2);
-
     .main {
         width: 1184px;
         height: 572px;
@@ -12,78 +11,20 @@
         border-radius: 7px;
         display: flex;
         flex-wrap: wrap;
-
         .header {
             width: 100%;
             margin-top: 50px;
-            color: #2f2f2f;
-            font-family: "Montserrat";
-            font-style: normal;
-            font-weight: bold;
-            font-size: 18px;
-            line-height: 22px;
-            text-align: center;
         }
-
         .container {
             padding: 0 122px 100px 85px;
             display: flex;
-
-            .moneyContainer {
-                display: flex;
-                flex-wrap: wrap;
-                grid-gap: 10px;
-                width: 85px;
-            }
-
-            .jarContainer {
-                width: 380px;
-                display: flex;
-                position: relative;
-                justify-content: space-around;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                .bottomElement {
-                    display: flex;
-                    flex-direction: column;
-                    width: 200px;
-                    height: 35px;
-                    position: absolute;
-                    bottom: 40px;
-                    .textClear {
-                        cursor: pointer;
-                        height: 24px;
-                        font-family: Montserrat;
-                        font-style: normal;
-                        font-weight: bold;
-                        font-size: 16px;
-                        line-height: 24px;
-                        text-align: center;
-                        text-decoration-line: underline;
-                        color: #369cb7;
-                        user-select: none;
-                        margin-bottom: 10px;
-                        &:hover {
-                            opacity: 0.8;
-                        }
-                        &:active {
-                            animation: linkHover 0.2s both;
-                        }
-                    }
-                    .buttonDone {
-                        @include mixButton();
-                    }
-                }
-            }
-
             .multiJarContainer {
                 display: flex;
                 position: relative;
                 justify-content: space-around;
                 align-items: center;
                 grid-gap: 25px;
-                margin-left: 100px;
+                flex: 3;
             }
         }
     }
@@ -155,33 +96,16 @@
             .container {
                 padding: 0 50px 50px;
                 flex-direction: column;
-                .moneyContainer {
-                    width: 100%;
-                    justify-content: center;
-                }
-                .jarContainer {
-                    width: 100%;
-                    justify-content: center;
-                    margin: 30px 0 60px 0;
-                    .bottomElement {
-                        bottom: -10px;
-                    }
-                }
+
                 .multiJarContainer {
+                    flex: 1;
                     margin-left: 0;
-                    width: 100%;
                 }
             }
         }
 
         .resultMain {
             width: 100%;
-            .resultContainer {
-                .container {
-                }
-                .bottomButtonRedo {
-                }
-            }
         }
     }
 }

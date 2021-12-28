@@ -1,0 +1,45 @@
+@import "./../../styleMixin/";
+
+.style {
+    flex: 2;
+    display: flex;
+    justify-content: space-around;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+    .bottomElement {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        height: 35px;
+        position: absolute;
+        bottom: 40px;
+        .textClear {
+            @include mixStyleText();
+            cursor: pointer;
+            height: 24px;
+            user-select: none;
+            margin-bottom: 10px;
+            &:hover {
+                opacity: 0.8;
+            }
+            &:active {
+                animation: linkHover 0.2s both;
+            }
+        }
+        .buttonDone {
+            @include mixButton();
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .style {
+        flex: 1;
+        margin-bottom: 60px;
+        .bottomElement {
+            bottom: -10px;
+        }
+    }
+}

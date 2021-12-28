@@ -1,5 +1,4 @@
-@mixin mixButton($color:'', $background:'', $border:'') {
-
+@mixin mixButton($color: "", $background: "", $border: "") {
     @if $background != "" {
         background: $background;
     } @else {
@@ -15,7 +14,7 @@
     @if $border != "" {
         border: 1px solid $border;
     } @else {
-        border: 1px solid #369CB7;
+        border: 1px solid #369cb7;
     }
 
     display: flex;
@@ -36,4 +35,20 @@
     &:active {
         box-shadow: black 0px 0px 2px;
     }
+}
+
+@mixin mixStyleText($color: "") {
+    @if $color != "" {
+        color: $color;
+    } @else {
+        color: #369cb7;
+    }
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    text-decoration-line: underline;
 }
